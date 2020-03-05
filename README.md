@@ -110,6 +110,8 @@ urlpatterns = [
 
 - 넣고 이미지도 넣어준다.
 
+- 이미지는 주로 [픽사베이](https://pixabay.com/ko/)를 사용한다고 한다.
+
 ![image](https://user-images.githubusercontent.com/26649731/75962021-62305a80-5f06-11ea-98a5-8dfa04477915.png)
 
 ### 3.2 static 설정
