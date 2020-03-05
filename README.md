@@ -126,7 +126,7 @@ STATICFILES_DIRS = (
 
 ```html
 {% load staticfiles %}
-<img src="{% static 'ktnet.jpg' %}">
+<img src="{% static 'jeju.jpg' %}">
 ```
 
 ![image](https://user-images.githubusercontent.com/26649731/75962150-93a92600-5f06-11ea-9a90-c8a1dd18bb54.png)
