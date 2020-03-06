@@ -110,6 +110,8 @@ urlpatterns = [
 
 - 넣고 이미지도 넣어준다.
 
+- 이미지는 주로 [픽사베이](https://pixabay.com/ko/)를 사용한다고 한다.
+
 ![image](https://user-images.githubusercontent.com/26649731/75962021-62305a80-5f06-11ea-98a5-8dfa04477915.png)
 
 ### 3.2 static 설정
@@ -126,7 +128,7 @@ STATICFILES_DIRS = (
 
 ```html
 {% load staticfiles %}
-<img src="{% static 'ktnet.jpg' %}">
+<img src="{% static 'jeju.jpg' %}">
 ```
 
 ![image](https://user-images.githubusercontent.com/26649731/75962150-93a92600-5f06-11ea-9a90-c8a1dd18bb54.png)
@@ -211,4 +213,3 @@ def cafeList(request):
 ![image](https://user-images.githubusercontent.com/26649731/76037870-75d1d480-5f8b-11ea-8c49-c4a40afbc040.png)
 
 - 잘 작성된 것을 볼 수 있었다.
-
