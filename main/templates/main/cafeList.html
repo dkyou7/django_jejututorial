@@ -1,14 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>hello, this is cafeList</h1>
-{% for elem in cafeList %}
-    <h2><a href="{% url 'cafeDetails' elem.id %}">{{elem.name}}</a></h2>
-    <p>{{elem.content}}</p>
-{% endfor %}
-</body>
-</html>
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- cafe-list 시작 -->
+        <div class="cafe-list">
+            <div class="grid">
+              {% for i in cafeList %}
+                <!-- 카페 1개 시작 -->
+                <section class="cafe-item">
+                    <figure class="cafe-item-photo">
+                        {% if i.mainphoto %}
+                            <img src="{{ i.mainphoto.url }}" alt="">
+                        {% endif %}
+                    </figure>
+                    <div class="cafe-item-info">
+                        <a href="{% url 'cafeDetails' i.pk %}" style="text-decoration:none"><h2>{{i.name}}</h2></a>
+                        <p>{{i.content}}</p>
+                        <ul class="cafe-item-contact">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{i.locate}}
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                {{i.phone}}
+                            </li>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                                {{i.insta}}
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- 카페 1개 끝 -->
+                {% endfor %}
+            </div>
+        </div>
+        <!-- cafe-list 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+{% endblock content %}

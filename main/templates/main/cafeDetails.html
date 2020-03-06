@@ -1,20 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>hello, this is cafeDetails</h1>
-    <h2>{{cafeObj.name}}</h2>
-    <p>{{cafeObj.content | linebreaks }}</p>
-    <p>{{cafeObj.publishedDate | linebreaks }}</p>
-    <p>{{cafeObj.insta | linebreaks }}</p>
-    <p>{{cafeObj.tag.names | linebreaks }}</p>
-    {% if cafeObj.mainphoto %}
-        <img src="{{cafeObj.mainphoto.url}}">
-    {% endif %}
-    <a href="{% url 'cafeList' %}">목록으로</a>
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- 소개 페이지 내용 시작 -->
+        <div class="grid">
+        <header>
+                <h1>{{cafeObj.name}}</h1>
+        <br>
+        <div class="slideshow-container">
+        {% if cafeObj.mainphoto %}
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 2</div>
+            <img src="{{ cafeObj.mainphoto.url }}">
+          <div class="text">Caption One</div>
+        </div>
+        {% endif %}
+        {% if cafeObj.subphoto %}
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 2</div>
+          <img src="{{cafeObj.subphoto.url }}">
+          <div class="text">Caption Two</div>
+        </div>
+        {% endif %}
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+        </header>
+        <section class="content-section">
+          <h2>{{cafeObj.content}}</h2>
+          <br>
+          <div class="cafe-item-info">
+          <ul class="cafe-item-contact">
+            <li>
+                <i class="fas fa-map-marker-alt"></i>
+                {{cafeObj.locate}}
+            </li>
+            <li>
+                <i class="fas fa-phone"></i>
+                {{cafeObj.phone}}
+            </li>
+            <li>
+                <i class="fab fa-instagram"></i>
+                {{cafeObj.insta}}
+            </li>
+            <li>
+              <p>{{cafeObj.content|linebreaks}}</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+        <!-- 소개 페이지 내용 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+    </div>
+
+    <div id="map"></div>
+    <script>
+      var data = marker
+      function initMap() {
+        var jeju = {lat: 33.3616658, lng: 126.5204118};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: jeju
+        });
+
+        var marker = new google.maps.Marker({
+          position: {lat: {{cafeObj.lat}}, lng: {{cafeObj.lng}}},
+          map: map
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKrZSsLIuxHuu59UCARaAvUtcmaMmBeU&callback=initMap">
+    </script>
+{% endblock content %}
+<!-- 뎃글 시작 -->
 <div id="disqus_thread"></div>
 <script>
 
@@ -29,11 +100,9 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 (function() { // DON'T EDIT BELOW THIS LINE
 var d = document, s = d.createElement('script');
-s.src = 'https://jejututorial.disqus.com/embed.js';
+s.src = 'https://jejucodincampsample.disqus.com/embed.js';
 s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</body>
-</html>

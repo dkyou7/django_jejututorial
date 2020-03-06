@@ -379,6 +379,8 @@ python manage.py migrate main
 
 ## 8. 댓글 구현 및 태그 구현
 
+### 8.1 댓글 구현
+
 - 댓글 구현은 Disqus라는걸 이용한다. 따로 코딩할 필요 없음.
 
   - 튜토리얼 보면서 나오는 코드를 details 하단에 붙여넣으면 된다.
@@ -396,9 +398,9 @@ python manage.py migrate main
   ]
   ```
 
-  
+### 8.2 태그 구현
 
-### 8.1 모델(Model) 구현
+#### 8.1 모델(Model) 구현
 
 - 모델 싹 뜯어고쳤다.
 
@@ -429,7 +431,7 @@ python manage.py makemigrations main
 python manage.py migrate main
 ```
 
-### 8.2 탬플릿(template) 코딩
+#### 8.2 탬플릿(template) 코딩
 
 - 구조와 변수명을 바꾸었기 때문에 templates에서 받는 변수명도 바뀌어야 한다.
 
