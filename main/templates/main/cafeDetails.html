@@ -7,7 +7,10 @@
 <body>
 <h1>hello, this is cafeDetails</h1>
     <h2>{{cafeObj.cafeName}}</h2>
-    <p>{{cafeObj.description}}</p>
+    <p>{{cafeObj.description | linebreaks }}</p>
+    {% if cafeObj.cafeImg %}
+        <img src="{{cafeObj.cafeImg.url}}">
+    {% endif %}
     <a href="{% url 'cafeList' %}">목록으로</a>
 </body>
 </html>

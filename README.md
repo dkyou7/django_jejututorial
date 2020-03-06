@@ -303,3 +303,75 @@ urlpatterns = [
 ![image](https://user-images.githubusercontent.com/26649731/76043912-38297780-5f9c-11ea-8d1a-dd5366706f6b.png)
 
 - detail 도 id값에 따라 잘 구현 되었다.
+
+## 7. 사진(media) 넣기
+
+- 사진을 넣어보자. 약간 세팅이 어려울 수 있지만 따라하기만 하면 된다.
+- 먼저 project-name > media 폴더를 생성하자. 여기에 사진이 들어가게 된다.
+
+### 7.1 config 코딩
+
+- settings.py에 다음을 추가한다. 미디어 관련 파일을 넣겠다는 말이다.
+
+```python
+# config/settings.py
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+```
+
+- urls.py에 다음을 추가하면서 미디어를 추가해준다.
+
+```python
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    ....
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+### 7.2 모델(Model) 코딩
+
+- 이제 이미지를 넣기위한 작업을 추가해보자. 이미지 영역을 추가하면 된다.
+
+```python
+from django.db import models
+
+# Create your models here.
+class Cafe(models.Model):
+    cafeName = models.CharField(max_length=50)
+    cafeImg = models.ImageField(blank=True,null=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.cafeName
+```
+
+- **모델 수정시 반드시 마이그레이션 해줘야 한다.**
+
+```bash
+python manage.py makemigrations main
+python manage.py migrate main
+```
+
+- 뷰는 따로 변경 안해줘도 된다. 어짜피 객체를 가져오는 것이기 때문이다.
+  이제 템플릿을 수정해보자
+
+### 7.3 탬플릿(templates) 코딩
+
+- 사진이 없는 글도 있기 때문에 if 문을 적용시킨다.
+
+```python
+<h2>{{cafeObj.cafeName}}</h2>
+<p>{{cafeObj.description | linebreaks }}</p>
+{% if cafeObj.cafeImg %}
+<img src="{{cafeObj.cafeImg.url}}">
+{% endif %}
+<a href="{% url 'cafeList' %}">목록으로</a>
+```
+
+![image](https://user-images.githubusercontent.com/26649731/76051333-c6f2c000-5fad-11ea-8e6a-644598244c97.png)
+
+- 이미지가 짤렸지만 잘 적용된 것을 볼 수 있다.
+
