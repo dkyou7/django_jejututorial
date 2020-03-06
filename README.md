@@ -132,3 +132,83 @@ STATICFILES_DIRS = (
 ![image](https://user-images.githubusercontent.com/26649731/75962150-93a92600-5f06-11ea-9a90-c8a1dd18bb54.png)
 
 - 이미지가 잘 등록되었다.
+
+## 4. Model 이용하기
+
+- 이제는 MVT 구조를 이용하여 웹을 설계해보자
+
+### 4.1 Model(모델) 작성하기
+
+- 맨 처음에는 무조건 모델을 설계한다. 간단하게 카페 이름과 카페 설명을 골자로 하는 모델을 생성해보았다.
+- \__str\__은 관리자권한에서 보여줄 단어를 나타낸다.
+
+```python
+# main/models.py
+
+from django.db import models
+
+# Create your models here.
+class Cafe(models.Model):
+    cafeName = models.CharField(max_length=50)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.cafeName
+```
+
+- 모델을 작성했으면 URL 로 이어준다.
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    ...
+    path('cafeList/',views.cafeList,name='cafeList')
+]
+```
+
+- 모델을 작성한 뒤 주의점은 __마이그레이션을 진행해야한다는 점__이다.
+
+- 다음 명령어로 꼭 모델을 DB에 적용시키자
+
+```bash
+python manage.py makemigrations main
+python manage.py migrate main
+```
+
+### 4.2 뷰(View) 작성하기
+
+- 모델에서 작성한 것을 어떤 것이 보여줄 것인지 지정한다.
+- main/cafeList.html에서 보여주기로 하자.
+
+```python
+from django.shortcuts import render
+
+# Create your views here.
+
+def cafeList(request):
+    return render(request,'main/cafeList.html')
+```
+
+### 4.3 템플릿(Templates) 작성하기
+
+- html로 사용자들이 볼 수 있도록 한다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>hello, this is cafeList</h1>
+</body>
+</html>
+```
+
+![image](https://user-images.githubusercontent.com/26649731/76037870-75d1d480-5f8b-11ea-8c49-c4a40afbc040.png)
+
+- 잘 작성된 것을 볼 수 있었다.
+
