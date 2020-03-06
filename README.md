@@ -213,3 +213,38 @@ def cafeList(request):
 ![image](https://user-images.githubusercontent.com/26649731/76037870-75d1d480-5f8b-11ea-8c49-c4a40afbc040.png)
 
 - 잘 작성된 것을 볼 수 있었다.
+
+## 5. list 띄우기
+
+- 이제 관리자페이지에서 등록한 카페이름과 설명을 사용자에게 보여주도록 하자.
+- 뷰에서 모델 부분을 파라메터로 넘기고 템플릿에서 보여주는 작업을 하면 된다.(2가지)
+
+### 5.1 뷰(View) 작업
+
+```python
+from django.shortcuts import render
+from .models import Cafe	# <---- 모델에서 가져온다.
+
+# Create your views here.
+
+def cafeList(request):
+    cafeList = Cafe.objects.all()# <---- 전체로 가져오고 이걸 파라메타로 넘긴다.
+    return render(request,'main/cafeList.html',{'cafeList':cafeList})
+```
+
+### 5.2 탬플릿(templates) 작업
+
+```html
+<h1>hello, this is cafeList</h1>
+{% for elem in cafeList %}
+    <h2>{{elem.cafeName}}</h2>
+    <p>{{elem.description}}</p>
+{% endfor %}
+```
+
+- 변수는 `{{}}`으로 작업하고 문법은 `{%%}`로 작업한다.
+
+![image](https://user-images.githubusercontent.com/26649731/76039797-d7487200-5f90-11ea-8601-64f40424b71e.png)
+
+- 리스트가 잘 출력되었다!
+
