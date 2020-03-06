@@ -458,5 +458,29 @@ python manage.py migrate main
 
 - 댓글기능까지 구현 된 것을 볼 수 있다.
 
+## 9. 템플릿 확장
 
+- 갑자기 코드가 확 바뀌는데 프론트가 많이 추가되어 그렇다.
+
+확장법은 다음과 같다
+
+```python
+# main/base.html
+
+{% block content %}
+{% endblock %}
+```
+
+```python
+# main/*.html
+
+{% extends "main/base.html" %}
+	...
+{% block content %}
+{% endblock content %}
+```
+
+![image](https://user-images.githubusercontent.com/26649731/76067782-49da4180-5fd3-11ea-9fd9-60d05bccac8a.png)
+
+- 역시 프론트가 답인가... 너무 예뻐졌다.
 
