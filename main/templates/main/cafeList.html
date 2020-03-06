@@ -7,8 +7,8 @@
 <body>
 <h1>hello, this is cafeList</h1>
 {% for elem in cafeList %}
-    <h2><a href="{% url 'cafeDetails' elem.id %}">{{elem.cafeName}}</a></h2>
-    <p>{{elem.description}}</p>
+    <h2><a href="{% url 'cafeDetails' elem.id %}">{{elem.name}}</a></h2>
+    <p>{{elem.content}}</p>
 {% endfor %}
 </body>
 </html>

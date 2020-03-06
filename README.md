@@ -375,3 +375,86 @@ python manage.py migrate main
 
 - 이미지가 짤렸지만 잘 적용된 것을 볼 수 있다.
 
+
+
+## 8. 댓글 구현 및 태그 구현
+
+- 댓글 구현은 Disqus라는걸 이용한다. 따로 코딩할 필요 없음.
+
+  - 튜토리얼 보면서 나오는 코드를 details 하단에 붙여넣으면 된다.
+
+- 태그 구현은 먼저 패키지를 설치해보자
+
+  > pip3 install django-taggit
+
+- INSTALLED_APPS 추가
+
+  ```python
+  INSTALLED_APPS = [
+      ...
+      'taggit',
+  ]
+  ```
+
+  
+
+### 8.1 모델(Model) 구현
+
+- 모델 싹 뜯어고쳤다.
+
+```python
+from django.db import models
+from taggit.managers import TaggableManager
+
+class Cafe(models.Model):
+    name = models.CharField(max_length=50)
+    lat = models.FloatField(null=True)
+    lng = models.FloatField(null=True)
+    mainphoto = models.ImageField(blank=True, null=True)
+    subphoto = models.ImageField(blank=True, null=True)
+    publishedDate = models.DateTimeField(blank=True, null=True)
+    modifiedDate = models.DateTimeField(blank=True, null=True)
+    content = models.TextField()
+    locate = models.TextField(null=True)
+    phone = models.TextField(null=True)
+    insta = models.TextField(null=True)
+    tag = TaggableManager(blank=True)
+
+    def __str__(self):
+        return self.name
+```
+
+```bash
+python manage.py makemigrations main
+python manage.py migrate main
+```
+
+### 8.2 탬플릿(template) 코딩
+
+- 구조와 변수명을 바꾸었기 때문에 templates에서 받는 변수명도 바뀌어야 한다.
+
+```html
+{% for elem in cafeList %}
+    <h2><a href="{% url 'cafeDetails' elem.id %}">{{elem.name}}</a></h2>
+    <p>{{elem.content}}</p>
+{% endfor %}
+```
+
+```html
+<h2>{{cafeObj.name}}</h2>
+<p>{{cafeObj.content | linebreaks }}</p>
+<p>{{cafeObj.publishedDate | linebreaks }}</p>
+<p>{{cafeObj.insta | linebreaks }}</p>
+<p>{{cafeObj.tag.names | linebreaks }}</p>
+{% if cafeObj.mainphoto %}
+<img src="{{cafeObj.mainphoto.url}}">
+{% endif %}
+<a href="{% url 'cafeList' %}">목록으로</a>
+```
+
+![image](https://user-images.githubusercontent.com/26649731/76054855-5f407300-5fb5-11ea-9821-87d0d1c14d87.png)
+
+- 댓글기능까지 구현 된 것을 볼 수 있다.
+
+
+

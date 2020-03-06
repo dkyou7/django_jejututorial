@@ -1,11 +1,20 @@
 from django.db import models
+from taggit.managers import TaggableManager
 
-# Create your models here.
+
 class Cafe(models.Model):
-    cafeName = models.CharField(max_length=50)
-    cafeImg = models.ImageField(blank=True,null=True)
-    description = models.TextField()
+    name = models.CharField(max_length=50)
+    lat = models.FloatField(null=True)
+    lng = models.FloatField(null=True)
+    mainphoto = models.ImageField(blank=True, null=True)
+    subphoto = models.ImageField(blank=True, null=True)
+    publishedDate = models.DateTimeField(blank=True, null=True)
+    modifiedDate = models.DateTimeField(blank=True, null=True)
+    content = models.TextField()
+    locate = models.TextField(null=True)
+    phone = models.TextField(null=True)
+    insta = models.TextField(null=True)
+    tag = TaggableManager(blank=True)
 
     def __str__(self):
-        return self.cafeName
-
+        return self.name
