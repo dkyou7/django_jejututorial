@@ -248,3 +248,58 @@ def cafeList(request):
 
 - 리스트가 잘 출력되었다!
 
+## 6. 디테일 보여주기
+
+- 이제 제목을 클릭하면 디테일을 보여주고, 디테일에 들어가면 목록으로 나갈 수 있도록 하도록 구현한다.
+- 그러자면 먼저 details를 구현해야한다.
+- 마찬가지로 뷰와 템플릿에 적절하게 적용해보자.
+
+### 6.1 뷰(view) 코딩
+
+```python
+from django.shortcuts import render
+from .models import Cafe
+
+# Create your views here.
+
+def cafeDetail(request,pk):
+    cafeObj = Cafe.objects.get(pk=pk)	#<-------pk값을 기준으로 가져온다.
+    return render(request,'main/cafeDetails.html',{'cafeObj':cafeObj})
+```
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+	...
+    path('cafeList/<int:pk>/',views.cafeDetail,name='cafeDetails'),
+]
+```
+
+### 6.2 탬플릿(templates) 코딩
+
+- 이제 `name=`옵션의 위력이 나온다.
+
+```html
+<!--main/cafeDetails.html-->
+
+<h1>hello, this is cafeDetails</h1>
+<h2>{{cafeObj.cafeName}}</h2>
+<p>{{cafeObj.description}}</p>
+<a href="{% url 'cafeList' %}">목록으로</a>
+```
+
+```html
+<!--main/cafeList.html-->
+
+<h1>hello, this is cafeList</h1>
+{% for elem in cafeList %}
+    <h2><a href="{% url 'cafeDetails' elem.pk %}">{{elem.cafeName}}</a></h2>
+    <p>{{elem.description}}</p>
+{% endfor %}
+```
+
+![image](https://user-images.githubusercontent.com/26649731/76043912-38297780-5f9c-11ea-8d1a-dd5366706f6b.png)
+
+- detail 도 id값에 따라 잘 구현 되었다.
