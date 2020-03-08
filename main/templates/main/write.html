@@ -1,0 +1,122 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- 카페등록 페이지 내용 시작! -->
+        <article class="page-content">
+            <div class="grid">
+                <header>
+                    <h1>카페등록</h1>
+                </header>
+                <form>
+                    <div class="form-row">
+                        <div class="form-row-content">
+                            <span class="form-row-label">카페위치</span>
+                            <div class="form-row-input">
+                                <label>
+                                    <input type="radio" name="cafeArea" value="1">
+                                    <span>구좌읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="2">
+                                    <span>남원읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="3">
+                                    <span>대정읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="4">
+                                    <span>서귀포시내</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="5">
+                                    <span>성산읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="6">
+                                    <span>안덕면</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="7">
+                                    <span>애월읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="8">
+                                    <span>우도면</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="9">
+                                    <span>제주시내</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="10">
+                                    <span>조천읍</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="11">
+                                    <span>표선면</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="12">
+                                    <span>한경면</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="cafeArea" value="13">
+                                    <span>한림읍</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-row-content">
+                            <span class="form-row-label">카페이름</span>
+                            <div class="form-row-input">
+                                <input type="text" name="cafeName">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-row-content">
+                            <span class="form-row-label">주소</span>
+                            <div class="form-row-input">
+                                <input type="text" name="cafeAddress">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-row-content">
+                            <span class="form-row-label">전화번호</span>
+                            <div class="form-row-input">
+                                <input type="text" name="cafePhoneNum">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-row-content">
+                            <span class="form-row-label">카페소개</span>
+                            <div class="form-row-input">
+                                <input type="text" name="cafeIntro">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-row-content">
+                            <span class="form-row-label">사진</span>
+                            <div class="form-row-input">
+                                <input type="file" name="cafePhoto">
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-row form-row-btn-con">
+                        <input type="submit" value="등록하기" class="btn big-btn cafe-write-btn">
+                    </div>
+                </form>
+            </div>
+        </article>
+        <!-- 카페등록 페이지 내용 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+{% endblock content %}
